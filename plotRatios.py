@@ -64,12 +64,15 @@ for key, value in samples.iteritems():
   
   print " " , key, " : 14/13.6 = " , gr.Eval(14) / gr.Eval(13.6)
   histo_ratio_14_13p6.Fill(iSample, gr.Eval(14) / gr.Eval(13.6))
+  histo_ratio_14_13p6.SetBinError(iSample+1, 0)
   histo_ratio_14_13p6.GetXaxis().SetBinLabel(iSample+1, key)
   
   histo_ratio_14_13.Fill(iSample, gr.Eval(14.0) / gr.Eval(13.0))
+  histo_ratio_14_13.SetBinError(iSample+1, 0)
   histo_ratio_14_13.GetXaxis().SetBinLabel(iSample+1, key)
 
   histo_ratio_13p6_13.Fill(iSample, gr.Eval(13.6) / gr.Eval(13.0))
+  histo_ratio_13p6_13.SetBinError(iSample+1, 0)
   histo_ratio_13p6_13.GetXaxis().SetBinLabel(iSample+1, key)
   iSample+=1
   
@@ -86,33 +89,57 @@ cc.SaveAs("test.png")
   
 
 histo_ratio_14_13p6.SetFillColor(ROOT.kBlue)
+histo_ratio_14_13p6.SetLineColor(ROOT.kBlue)
 histo_ratio_14_13p6.SetFillStyle(3002)
-histo_ratio_14_13p6.GetYaxis().SetRangeUser(1.00, 2.00)
+histo_ratio_14_13p6.GetYaxis().SetRangeUser(1.00, 1.50)
+histo_ratio_14_13p6.GetYaxis().SetTitle("#sigma_{14} / #sigma_{13.6 TeV}")
 
-histo_ratio_14_13p6.Draw("hbar2")
+#histo_ratio_14_13p6.Draw("hbar2")
+histo_ratio_14_13p6.Draw("hbar")
 cc.SaveAs("test_ratio_14_13p6.root")
 cc.SaveAs("test_ratio_14_13p6.png")
 
 
 
 histo_ratio_13p6_13.SetFillColor(ROOT.kRed)
+histo_ratio_13p6_13.SetLineColor(ROOT.kRed)
 histo_ratio_13p6_13.SetFillStyle(3002)
-histo_ratio_13p6_13.GetYaxis().SetRangeUser(1.00, 2.00)
+histo_ratio_13p6_13.GetYaxis().SetRangeUser(1.00, 1.50)
+histo_ratio_13p6_13.GetYaxis().SetTitle("#sigma_{13.6} / #sigma_{13 TeV}")
 
-histo_ratio_13p6_13.Draw("hbar2")
+histo_ratio_13p6_13.Draw("hbar")
 cc.SaveAs("test_ratio_13p6_13.root")
 cc.SaveAs("test_ratio_13p6_13.png")
 
 
-histo_ratio_14_13.SetFillColor(ROOT.kRed+3)
-histo_ratio_14_13.SetFillStyle(3002)
-histo_ratio_14_13.GetYaxis().SetRangeUser(1.00, 2.00)
+histo_ratio_14_13.SetFillColor(ROOT.kGreen)
+histo_ratio_14_13.SetLineColor(ROOT.kGreen)
+histo_ratio_14_13.SetFillStyle(3001)
+histo_ratio_14_13.GetYaxis().SetRangeUser(1.00, 1.50)
+histo_ratio_14_13.GetYaxis().SetTitle("#sigma_{14} / #sigma_{13 TeV}")
 
-histo_ratio_14_13.Draw("hbar2")
+histo_ratio_14_13.Draw("hbar")
 cc.SaveAs("test_ratio_14_13.root")
 cc.SaveAs("test_ratio_14_13.png")
 
 
 
 
+
+
+
+histo_ratio_14_13.Draw("hbar")
+histo_ratio_13p6_13.Draw("hbar same")
+
+leg2 = TLegend(0.6, 0.4, 0.9, 0.9);
+leg2.SetFillColor(0);
+leg2.AddEntry(histo_ratio_14_13,   " 13 #rightarrow 14",   "lp");
+leg2.AddEntry(histo_ratio_13p6_13, " 13 #rightarrow 13.6", "lp");
+leg2.Draw();
+
+
+histo_ratio_14_13.GetYaxis().SetTitle("#sigma_{X} / #sigma_{13 TeV}")
+
+cc.SaveAs("test_ratio_14_13_and_13p6_13.root")
+cc.SaveAs("test_ratio_14_13_and_13p6_13.png")
 
