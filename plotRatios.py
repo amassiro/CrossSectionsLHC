@@ -1,14 +1,3 @@
-## \file
- ## \ingroup tutorial_pyroot
- ## \notebook -js
- ## A Simple histogram drawing example
- ##
- ## \macro_image
-## \macro_output
-## \macro_code
-##
-## \author Wim Lavrijsen
-
 import ROOT
 
 from ROOT import TCanvas, TPad, TFile, TPaveLabel, TPaveText
@@ -126,8 +115,6 @@ cc.SaveAs("test_ratio_14_13.png")
 
 
 
-
-
 histo_ratio_14_13.Draw("hbar")
 histo_ratio_13p6_13.Draw("hbar same")
 
@@ -142,4 +129,6 @@ histo_ratio_14_13.GetYaxis().SetTitle("#sigma_{X} / #sigma_{13 TeV}")
 
 cc.SaveAs("test_ratio_14_13_and_13p6_13.root")
 cc.SaveAs("test_ratio_14_13_and_13p6_13.png")
+
+
 
